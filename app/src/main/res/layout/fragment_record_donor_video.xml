@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFFFF"
+    android:orientation="vertical"
+    tools:context="com.jiaying.mediatablet.fragment.RecordDonorVideoFragment">
+
+    <com.cylinder.www.facedetect.FdNotAuthRecordCameraView
+        android:id="@+id/fdNotAuthCameraView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/pb"
+            android:progress="0"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btn_record"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/video_category_selector_3"
+            android:text="录视频"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_big" />
+    </LinearLayout>
+
+</RelativeLayout>
