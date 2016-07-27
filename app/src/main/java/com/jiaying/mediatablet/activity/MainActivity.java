@@ -488,8 +488,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             recordState.recTimeStamp();
             recordState.commit();
         }
-        recordState.recConfirm();
-        recordState.commit();
+//        recordState.recConfirm();
+//        recordState.commit();
 
         allocDevDialog = new ProgressDialog(this);
 
