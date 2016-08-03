@@ -137,6 +137,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private View mParentView;
     private ImageView ivStartFistHint;
     private ImageView ivLogoAndBack;
+    private ImageView ivBack;//解决长按logo和点击logo冲突而增加的返回按钮
     private TextView fun_txt;//功能设置
     private TextView server_txt;//参数设置
     private TextView restart_txt;//软件重启
@@ -862,6 +863,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //标题栏内部左侧的图标
         ivLogoAndBack = (ImageView) findViewById(R.id.logo_or_back);
+        ivBack = (ImageView) findViewById(R.id.iv_back);
         ivLogoAndBack.setEnabled(true);
         ivLogoAndBack.setImageResource(R.mipmap.ic_launcher);
         ivLogoAndBack.setOnLongClickListener(new View.OnLongClickListener() {
@@ -1191,7 +1193,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             e.printStackTrace();
         }
 //       扫描5次都不能扫描成功就认为是蓝牙坏了
-        if (n < 1 ) {
+        if (n < 1) {
             return false;
         }
 
@@ -1406,8 +1408,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //设置logo按钮事件
         ivLogoAndBack.setEnabled(true);
+        ivLogoAndBack.setVisibility(View.VISIBLE);
+        ivBack.setVisibility(View.GONE);
         ivLogoAndBack.setImageResource(R.mipmap.ic_launcher);
-
+        ivLogoAndBack.setOnClickListener(null);
         ivLogoAndBack.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
@@ -1475,10 +1479,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //设置文字内容
         title_txt.setText(R.string.record_donor);
 
-        //设置logo按钮事件
-        ivLogoAndBack.setEnabled(true);
-        ivLogoAndBack.setImageResource(R.drawable.iv_back_selector);
-        ivLogoAndBack.setOnClickListener(new View.OnClickListener() {
+        //设置返回按钮事件
+
+        ivLogoAndBack.setVisibility(View.GONE);
+        ivBack.setVisibility(View.VISIBLE);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tabletStateContext.handleMessge(recordState, observableZXDCSignalListenerThread, null, null, RecSignal.CONFIRM);
@@ -1501,11 +1506,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switchUiComponent(fragmentManager, R.id.fragment_auth_container, blankFragment);
         //设置文字内容
         title_txt.setText(R.string.record_norse);
-
-        //设置logo按钮事件
-        ivLogoAndBack.setEnabled(true);
-        ivLogoAndBack.setImageResource(R.drawable.iv_back_selector);
-        ivLogoAndBack.setOnClickListener(new View.OnClickListener() {
+        ivLogoAndBack.setVisibility(View.GONE);
+        ivBack.setVisibility(View.VISIBLE);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tabletStateContext.handleMessge(recordState, observableZXDCSignalListenerThread, null, null, RecSignal.CONFIRM);
@@ -2072,7 +2075,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         title_txt.setText(R.string.fragment_wait_plasm_title);
 
         //设置logo按钮事件
+        ivBack.setVisibility(View.GONE);
+        ivLogoAndBack.setVisibility(View.VISIBLE);
         ivLogoAndBack.setEnabled(true);
+        ivLogoAndBack.setVisibility(View.VISIBLE);
         ivLogoAndBack.setImageResource(R.mipmap.ic_launcher);
         ivLogoAndBack.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
