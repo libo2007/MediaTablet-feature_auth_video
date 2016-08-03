@@ -58,6 +58,7 @@ import com.jiaying.mediatablet.fragment.authentication.AuthPreviewFragment;
 
 import com.jiaying.mediatablet.fragment.BlankFragment;
 import com.jiaying.mediatablet.fragment.authentication.RecordDonorFragment;
+import com.jiaying.mediatablet.fragment.authentication.RecordNurseFragment;
 import com.jiaying.mediatablet.fragment.collection.CollectionPreviewFragment;
 import com.jiaying.mediatablet.fragment.check.CheckFragment;
 
@@ -1464,7 +1465,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //设置显示状态
         showUiComponent(false, true, false, false);
 
-        // 调整录制浆元信息
+        // 调整录制浆员信息
         RecordDonorFragment recordDonorFragment = new RecordDonorFragment();
         switchUiComponent(fragmentManager, R.id.fragment_container, recordDonorFragment);
 
@@ -1480,14 +1481,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivLogoAndBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tabletStateContext.handleMessge(recordState, observableZXDCSignalListenerThread, null, null, RecSignal.REAUTHPASS);
+                tabletStateContext.handleMessge(recordState, observableZXDCSignalListenerThread, null, null, RecSignal.CONFIRM);
             }
         });
         Log.e("ERROR", "结束--处理录制浆员视频信号");
     }
 
     public synchronized void dealRecordNurseVideo() {
+        Log.e("ERROR", "开始--未认证——录制护士视频");
+        //设置显示状态
+        showUiComponent(false, true, false, false);
 
+        // 调整录制护士信息
+        RecordNurseFragment recordNurseFragment = new RecordNurseFragment();
+        switchUiComponent(fragmentManager, R.id.fragment_container, recordNurseFragment);
+
+        //隐藏认证预览界面
+        BlankFragment blankFragment = new BlankFragment();
+        switchUiComponent(fragmentManager, R.id.fragment_auth_container, blankFragment);
+        //设置文字内容
+        title_txt.setText(R.string.record_norse);
+
+        //设置logo按钮事件
+        ivLogoAndBack.setEnabled(true);
+        ivLogoAndBack.setImageResource(R.drawable.iv_back_selector);
+        ivLogoAndBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tabletStateContext.handleMessge(recordState, observableZXDCSignalListenerThread, null, null, RecSignal.CONFIRM);
+            }
+        });
+        Log.e("ERROR", "结束--未认证——录制护士视频信息");
     }
 
 

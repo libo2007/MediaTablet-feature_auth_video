@@ -102,6 +102,9 @@ public class WaitingForAuthState extends AbstractState {
             case RECORDDONORVIDEO:
                 listenerThread.notifyObservers(RecSignal.RECORDDONORVIDEO);
                 break;
+            case RECORDNURSEVIDEO:
+                listenerThread.notifyObservers(RecSignal.RECORDNURSEVIDEO);
+                break;
 
             case RESTART:
                 //记录状态
