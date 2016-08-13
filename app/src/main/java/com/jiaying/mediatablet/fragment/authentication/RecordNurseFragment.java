@@ -56,7 +56,7 @@ public class RecordNurseFragment extends Fragment {
             if (msg.what == MSG_UPDATE_PROGRESS) {
                 MyLog.e(TAG, "currentProgress:" + currentProgress);
                 mProgressBar.setProgress(currentProgress);
-                if (currentProgress == MAX_TIME) {
+                if (currentProgress >= MAX_TIME) {
                     isRecordOver = true;
                     stopRecord(true);
                 }
