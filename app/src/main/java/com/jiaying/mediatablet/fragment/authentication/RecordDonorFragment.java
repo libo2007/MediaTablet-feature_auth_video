@@ -37,22 +37,22 @@ public class RecordDonorFragment extends Fragment {
     private FdNotAuthRecordActivity fdActivity;
     private OnFragmentInteractionListener mListener;
 
-    //最多录制10s
-    private static final int MAX_TIME = 20;
     private Button btn_record;
     private ProgressBar mProgressBar;
     private boolean isRecording = false;
     private boolean isRecordOver = false;
     private int currentProgress = 0;
     private static final int MSG_UPDATE_PROGRESS = 1001;
-
-
+    //每隔2s刷新一次界面，一定程度上减少卡顿现象
+    private static final int UPDATE_PERIOD = 2;
+    //最多录制20s
+    private static final int MAX_TIME = 20 ;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == MSG_UPDATE_PROGRESS) {
-                MyLog.e(TAG, "currentProgress:" + currentProgress);
+                MyLog.e(TAG, "mainUI currentProgress=" + currentProgress);
                 mProgressBar.setProgress(currentProgress);
                 if (currentProgress >= MAX_TIME) {
                     isRecordOver = true;
@@ -158,14 +158,15 @@ public class RecordDonorFragment extends Fragment {
             while (true) {
                 try {
                     super.run();
-                    Thread.sleep(1000);
+                    Thread.sleep(UPDATE_PERIOD*1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if (!isRecording) {
                     break;
                 }
-                currentProgress++;
+                currentProgress+=UPDATE_PERIOD;
+                MyLog.e(TAG, "currentProgress=:" + currentProgress);
                 mHandler.sendEmptyMessage(MSG_UPDATE_PROGRESS);
             }
         }
